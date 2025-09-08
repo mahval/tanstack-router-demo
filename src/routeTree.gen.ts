@@ -8,243 +8,342 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root';
-import { Route as PathlessLayoutRouteImport } from './routes/_pathlessLayout';
-import { Route as PathlessLayoutNestedLayoutRouteImport } from './routes/_pathlessLayout/_nested-layout';
-import { Route as PathlessLayoutNestedLayoutRouteARouteImport } from './routes/_pathlessLayout/_nested-layout/route-a';
-import { Route as PathlessLayoutNestedLayoutRouteBRouteImport } from './routes/_pathlessLayout/_nested-layout/route-b';
-import { Route as AnchorRouteImport } from './routes/anchor';
-import { Route as IndexRouteImport } from './routes/index';
-import { Route as PostsPostIdRouteImport } from './routes/posts.$postId';
-import { Route as PostsIndexRouteImport } from './routes/posts.index';
-import { Route as PostsRouteRouteImport } from './routes/posts.route';
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as AnchorRouteImport } from './routes/anchor'
+import { Route as PathlessLayoutRouteImport } from './routes/_pathlessLayout'
+import { Route as PostsRouteRouteImport } from './routes/posts.route'
+import { Route as PokemonRouteRouteImport } from './routes/pokemon.route'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as PostsIndexRouteImport } from './routes/posts.index'
+import { Route as PokemonIndexRouteImport } from './routes/pokemon.index'
+import { Route as PostsChar123CategoryChar125RouteImport } from './routes/posts.{-$category}'
+import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
+import { Route as PokemonPokemonIdRouteImport } from './routes/pokemon.$pokemonId'
+import { Route as PathlessLayoutNestedLayoutRouteImport } from './routes/_pathlessLayout/_nested-layout'
+import { Route as PathlessLayoutNestedLayoutRouteBRouteImport } from './routes/_pathlessLayout/_nested-layout/route-b'
+import { Route as PathlessLayoutNestedLayoutRouteARouteImport } from './routes/_pathlessLayout/_nested-layout/route-a'
 
 const AnchorRoute = AnchorRouteImport.update({
-	id: '/anchor',
-	path: '/anchor',
-	getParentRoute: () => rootRouteImport,
-} as any);
+  id: '/anchor',
+  path: '/anchor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PathlessLayoutRoute = PathlessLayoutRouteImport.update({
-	id: '/_pathlessLayout',
-	getParentRoute: () => rootRouteImport,
-} as any);
+  id: '/_pathlessLayout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PostsRouteRoute = PostsRouteRouteImport.update({
-	id: '/posts',
-	path: '/posts',
-	getParentRoute: () => rootRouteImport,
-} as any);
+  id: '/posts',
+  path: '/posts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PokemonRouteRoute = PokemonRouteRouteImport.update({
+  id: '/pokemon',
+  path: '/pokemon',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
-	id: '/',
-	path: '/',
-	getParentRoute: () => rootRouteImport,
-} as any);
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PostsIndexRoute = PostsIndexRouteImport.update({
-	id: '/',
-	path: '/',
-	getParentRoute: () => PostsRouteRoute,
-} as any);
+  id: '/',
+  path: '/',
+  getParentRoute: () => PostsRouteRoute,
+} as any)
+const PokemonIndexRoute = PokemonIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PokemonRouteRoute,
+} as any)
+const PostsChar123CategoryChar125Route =
+  PostsChar123CategoryChar125RouteImport.update({
+    id: '/{-$category}',
+    path: '/{-$category}',
+    getParentRoute: () => PostsRouteRoute,
+  } as any)
 const PostsPostIdRoute = PostsPostIdRouteImport.update({
-	id: '/$postId',
-	path: '/$postId',
-	getParentRoute: () => PostsRouteRoute,
-} as any);
+  id: '/$postId',
+  path: '/$postId',
+  getParentRoute: () => PostsRouteRoute,
+} as any)
+const PokemonPokemonIdRoute = PokemonPokemonIdRouteImport.update({
+  id: '/$pokemonId',
+  path: '/$pokemonId',
+  getParentRoute: () => PokemonRouteRoute,
+} as any)
 const PathlessLayoutNestedLayoutRoute =
-	PathlessLayoutNestedLayoutRouteImport.update({
-		id: '/_nested-layout',
-		getParentRoute: () => PathlessLayoutRoute,
-	} as any);
+  PathlessLayoutNestedLayoutRouteImport.update({
+    id: '/_nested-layout',
+    getParentRoute: () => PathlessLayoutRoute,
+  } as any)
 const PathlessLayoutNestedLayoutRouteBRoute =
-	PathlessLayoutNestedLayoutRouteBRouteImport.update({
-		id: '/route-b',
-		path: '/route-b',
-		getParentRoute: () => PathlessLayoutNestedLayoutRoute,
-	} as any);
+  PathlessLayoutNestedLayoutRouteBRouteImport.update({
+    id: '/route-b',
+    path: '/route-b',
+    getParentRoute: () => PathlessLayoutNestedLayoutRoute,
+  } as any)
 const PathlessLayoutNestedLayoutRouteARoute =
-	PathlessLayoutNestedLayoutRouteARouteImport.update({
-		id: '/route-a',
-		path: '/route-a',
-		getParentRoute: () => PathlessLayoutNestedLayoutRoute,
-	} as any);
+  PathlessLayoutNestedLayoutRouteARouteImport.update({
+    id: '/route-a',
+    path: '/route-a',
+    getParentRoute: () => PathlessLayoutNestedLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-	'/': typeof IndexRoute;
-	'/posts': typeof PostsRouteRouteWithChildren;
-	'/anchor': typeof AnchorRoute;
-	'/posts/$postId': typeof PostsPostIdRoute;
-	'/posts/': typeof PostsIndexRoute;
-	'/route-a': typeof PathlessLayoutNestedLayoutRouteARoute;
-	'/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute;
+  '/': typeof IndexRoute
+  '/pokemon': typeof PokemonRouteRouteWithChildren
+  '/posts': typeof PostsRouteRouteWithChildren
+  '/anchor': typeof AnchorRoute
+  '/pokemon/$pokemonId': typeof PokemonPokemonIdRoute
+  '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/{-$category}': typeof PostsChar123CategoryChar125Route
+  '/pokemon/': typeof PokemonIndexRoute
+  '/posts/': typeof PostsIndexRoute
+  '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
+  '/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
 }
 export interface FileRoutesByTo {
-	'/': typeof IndexRoute;
-	'/anchor': typeof AnchorRoute;
-	'/posts/$postId': typeof PostsPostIdRoute;
-	'/posts': typeof PostsIndexRoute;
-	'/route-a': typeof PathlessLayoutNestedLayoutRouteARoute;
-	'/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute;
+  '/': typeof IndexRoute
+  '/anchor': typeof AnchorRoute
+  '/pokemon/$pokemonId': typeof PokemonPokemonIdRoute
+  '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/{-$category}': typeof PostsChar123CategoryChar125Route
+  '/pokemon': typeof PokemonIndexRoute
+  '/posts': typeof PostsIndexRoute
+  '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
+  '/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
 }
 export interface FileRoutesById {
-	__root__: typeof rootRouteImport;
-	'/': typeof IndexRoute;
-	'/posts': typeof PostsRouteRouteWithChildren;
-	'/_pathlessLayout': typeof PathlessLayoutRouteWithChildren;
-	'/anchor': typeof AnchorRoute;
-	'/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren;
-	'/posts/$postId': typeof PostsPostIdRoute;
-	'/posts/': typeof PostsIndexRoute;
-	'/_pathlessLayout/_nested-layout/route-a': typeof PathlessLayoutNestedLayoutRouteARoute;
-	'/_pathlessLayout/_nested-layout/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/pokemon': typeof PokemonRouteRouteWithChildren
+  '/posts': typeof PostsRouteRouteWithChildren
+  '/_pathlessLayout': typeof PathlessLayoutRouteWithChildren
+  '/anchor': typeof AnchorRoute
+  '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
+  '/pokemon/$pokemonId': typeof PokemonPokemonIdRoute
+  '/posts/$postId': typeof PostsPostIdRoute
+  '/posts/{-$category}': typeof PostsChar123CategoryChar125Route
+  '/pokemon/': typeof PokemonIndexRoute
+  '/posts/': typeof PostsIndexRoute
+  '/_pathlessLayout/_nested-layout/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
+  '/_pathlessLayout/_nested-layout/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
 }
 export interface FileRouteTypes {
-	fileRoutesByFullPath: FileRoutesByFullPath;
-	fullPaths:
-		| '/'
-		| '/posts'
-		| '/anchor'
-		| '/posts/$postId'
-		| '/posts/'
-		| '/route-a'
-		| '/route-b';
-	fileRoutesByTo: FileRoutesByTo;
-	to: '/' | '/anchor' | '/posts/$postId' | '/posts' | '/route-a' | '/route-b';
-	id:
-		| '__root__'
-		| '/'
-		| '/posts'
-		| '/_pathlessLayout'
-		| '/anchor'
-		| '/_pathlessLayout/_nested-layout'
-		| '/posts/$postId'
-		| '/posts/'
-		| '/_pathlessLayout/_nested-layout/route-a'
-		| '/_pathlessLayout/_nested-layout/route-b';
-	fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/pokemon'
+    | '/posts'
+    | '/anchor'
+    | '/pokemon/$pokemonId'
+    | '/posts/$postId'
+    | '/posts/{-$category}'
+    | '/pokemon/'
+    | '/posts/'
+    | '/route-a'
+    | '/route-b'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/anchor'
+    | '/pokemon/$pokemonId'
+    | '/posts/$postId'
+    | '/posts/{-$category}'
+    | '/pokemon'
+    | '/posts'
+    | '/route-a'
+    | '/route-b'
+  id:
+    | '__root__'
+    | '/'
+    | '/pokemon'
+    | '/posts'
+    | '/_pathlessLayout'
+    | '/anchor'
+    | '/_pathlessLayout/_nested-layout'
+    | '/pokemon/$pokemonId'
+    | '/posts/$postId'
+    | '/posts/{-$category}'
+    | '/pokemon/'
+    | '/posts/'
+    | '/_pathlessLayout/_nested-layout/route-a'
+    | '/_pathlessLayout/_nested-layout/route-b'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-	IndexRoute: typeof IndexRoute;
-	PostsRouteRoute: typeof PostsRouteRouteWithChildren;
-	PathlessLayoutRoute: typeof PathlessLayoutRouteWithChildren;
-	AnchorRoute: typeof AnchorRoute;
+  IndexRoute: typeof IndexRoute
+  PokemonRouteRoute: typeof PokemonRouteRouteWithChildren
+  PostsRouteRoute: typeof PostsRouteRouteWithChildren
+  PathlessLayoutRoute: typeof PathlessLayoutRouteWithChildren
+  AnchorRoute: typeof AnchorRoute
 }
 
 declare module '@tanstack/react-router' {
-	interface FileRoutesByPath {
-		'/anchor': {
-			id: '/anchor';
-			path: '/anchor';
-			fullPath: '/anchor';
-			preLoaderRoute: typeof AnchorRouteImport;
-			parentRoute: typeof rootRouteImport;
-		};
-		'/_pathlessLayout': {
-			id: '/_pathlessLayout';
-			path: '';
-			fullPath: '';
-			preLoaderRoute: typeof PathlessLayoutRouteImport;
-			parentRoute: typeof rootRouteImport;
-		};
-		'/posts': {
-			id: '/posts';
-			path: '/posts';
-			fullPath: '/posts';
-			preLoaderRoute: typeof PostsRouteRouteImport;
-			parentRoute: typeof rootRouteImport;
-		};
-		'/': {
-			id: '/';
-			path: '/';
-			fullPath: '/';
-			preLoaderRoute: typeof IndexRouteImport;
-			parentRoute: typeof rootRouteImport;
-		};
-		'/posts/': {
-			id: '/posts/';
-			path: '/';
-			fullPath: '/posts/';
-			preLoaderRoute: typeof PostsIndexRouteImport;
-			parentRoute: typeof PostsRouteRoute;
-		};
-		'/posts/$postId': {
-			id: '/posts/$postId';
-			path: '/$postId';
-			fullPath: '/posts/$postId';
-			preLoaderRoute: typeof PostsPostIdRouteImport;
-			parentRoute: typeof PostsRouteRoute;
-		};
-		'/_pathlessLayout/_nested-layout': {
-			id: '/_pathlessLayout/_nested-layout';
-			path: '';
-			fullPath: '';
-			preLoaderRoute: typeof PathlessLayoutNestedLayoutRouteImport;
-			parentRoute: typeof PathlessLayoutRoute;
-		};
-		'/_pathlessLayout/_nested-layout/route-b': {
-			id: '/_pathlessLayout/_nested-layout/route-b';
-			path: '/route-b';
-			fullPath: '/route-b';
-			preLoaderRoute: typeof PathlessLayoutNestedLayoutRouteBRouteImport;
-			parentRoute: typeof PathlessLayoutNestedLayoutRoute;
-		};
-		'/_pathlessLayout/_nested-layout/route-a': {
-			id: '/_pathlessLayout/_nested-layout/route-a';
-			path: '/route-a';
-			fullPath: '/route-a';
-			preLoaderRoute: typeof PathlessLayoutNestedLayoutRouteARouteImport;
-			parentRoute: typeof PathlessLayoutNestedLayoutRoute;
-		};
-	}
+  interface FileRoutesByPath {
+    '/anchor': {
+      id: '/anchor'
+      path: '/anchor'
+      fullPath: '/anchor'
+      preLoaderRoute: typeof AnchorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_pathlessLayout': {
+      id: '/_pathlessLayout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof PathlessLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/posts': {
+      id: '/posts'
+      path: '/posts'
+      fullPath: '/posts'
+      preLoaderRoute: typeof PostsRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pokemon': {
+      id: '/pokemon'
+      path: '/pokemon'
+      fullPath: '/pokemon'
+      preLoaderRoute: typeof PokemonRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/posts/': {
+      id: '/posts/'
+      path: '/'
+      fullPath: '/posts/'
+      preLoaderRoute: typeof PostsIndexRouteImport
+      parentRoute: typeof PostsRouteRoute
+    }
+    '/pokemon/': {
+      id: '/pokemon/'
+      path: '/'
+      fullPath: '/pokemon/'
+      preLoaderRoute: typeof PokemonIndexRouteImport
+      parentRoute: typeof PokemonRouteRoute
+    }
+    '/posts/{-$category}': {
+      id: '/posts/{-$category}'
+      path: '/{-$category}'
+      fullPath: '/posts/{-$category}'
+      preLoaderRoute: typeof PostsChar123CategoryChar125RouteImport
+      parentRoute: typeof PostsRouteRoute
+    }
+    '/posts/$postId': {
+      id: '/posts/$postId'
+      path: '/$postId'
+      fullPath: '/posts/$postId'
+      preLoaderRoute: typeof PostsPostIdRouteImport
+      parentRoute: typeof PostsRouteRoute
+    }
+    '/pokemon/$pokemonId': {
+      id: '/pokemon/$pokemonId'
+      path: '/$pokemonId'
+      fullPath: '/pokemon/$pokemonId'
+      preLoaderRoute: typeof PokemonPokemonIdRouteImport
+      parentRoute: typeof PokemonRouteRoute
+    }
+    '/_pathlessLayout/_nested-layout': {
+      id: '/_pathlessLayout/_nested-layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof PathlessLayoutNestedLayoutRouteImport
+      parentRoute: typeof PathlessLayoutRoute
+    }
+    '/_pathlessLayout/_nested-layout/route-b': {
+      id: '/_pathlessLayout/_nested-layout/route-b'
+      path: '/route-b'
+      fullPath: '/route-b'
+      preLoaderRoute: typeof PathlessLayoutNestedLayoutRouteBRouteImport
+      parentRoute: typeof PathlessLayoutNestedLayoutRoute
+    }
+    '/_pathlessLayout/_nested-layout/route-a': {
+      id: '/_pathlessLayout/_nested-layout/route-a'
+      path: '/route-a'
+      fullPath: '/route-a'
+      preLoaderRoute: typeof PathlessLayoutNestedLayoutRouteARouteImport
+      parentRoute: typeof PathlessLayoutNestedLayoutRoute
+    }
+  }
 }
 
+interface PokemonRouteRouteChildren {
+  PokemonPokemonIdRoute: typeof PokemonPokemonIdRoute
+  PokemonIndexRoute: typeof PokemonIndexRoute
+}
+
+const PokemonRouteRouteChildren: PokemonRouteRouteChildren = {
+  PokemonPokemonIdRoute: PokemonPokemonIdRoute,
+  PokemonIndexRoute: PokemonIndexRoute,
+}
+
+const PokemonRouteRouteWithChildren = PokemonRouteRoute._addFileChildren(
+  PokemonRouteRouteChildren,
+)
+
 interface PostsRouteRouteChildren {
-	PostsPostIdRoute: typeof PostsPostIdRoute;
-	PostsIndexRoute: typeof PostsIndexRoute;
+  PostsPostIdRoute: typeof PostsPostIdRoute
+  PostsChar123CategoryChar125Route: typeof PostsChar123CategoryChar125Route
+  PostsIndexRoute: typeof PostsIndexRoute
 }
 
 const PostsRouteRouteChildren: PostsRouteRouteChildren = {
-	PostsPostIdRoute: PostsPostIdRoute,
-	PostsIndexRoute: PostsIndexRoute,
-};
+  PostsPostIdRoute: PostsPostIdRoute,
+  PostsChar123CategoryChar125Route: PostsChar123CategoryChar125Route,
+  PostsIndexRoute: PostsIndexRoute,
+}
 
 const PostsRouteRouteWithChildren = PostsRouteRoute._addFileChildren(
-	PostsRouteRouteChildren,
-);
+  PostsRouteRouteChildren,
+)
 
 interface PathlessLayoutNestedLayoutRouteChildren {
-	PathlessLayoutNestedLayoutRouteARoute: typeof PathlessLayoutNestedLayoutRouteARoute;
-	PathlessLayoutNestedLayoutRouteBRoute: typeof PathlessLayoutNestedLayoutRouteBRoute;
+  PathlessLayoutNestedLayoutRouteARoute: typeof PathlessLayoutNestedLayoutRouteARoute
+  PathlessLayoutNestedLayoutRouteBRoute: typeof PathlessLayoutNestedLayoutRouteBRoute
 }
 
 const PathlessLayoutNestedLayoutRouteChildren: PathlessLayoutNestedLayoutRouteChildren =
-	{
-		PathlessLayoutNestedLayoutRouteARoute:
-			PathlessLayoutNestedLayoutRouteARoute,
-		PathlessLayoutNestedLayoutRouteBRoute:
-			PathlessLayoutNestedLayoutRouteBRoute,
-	};
+  {
+    PathlessLayoutNestedLayoutRouteARoute:
+      PathlessLayoutNestedLayoutRouteARoute,
+    PathlessLayoutNestedLayoutRouteBRoute:
+      PathlessLayoutNestedLayoutRouteBRoute,
+  }
 
 const PathlessLayoutNestedLayoutRouteWithChildren =
-	PathlessLayoutNestedLayoutRoute._addFileChildren(
-		PathlessLayoutNestedLayoutRouteChildren,
-	);
+  PathlessLayoutNestedLayoutRoute._addFileChildren(
+    PathlessLayoutNestedLayoutRouteChildren,
+  )
 
 interface PathlessLayoutRouteChildren {
-	PathlessLayoutNestedLayoutRoute: typeof PathlessLayoutNestedLayoutRouteWithChildren;
+  PathlessLayoutNestedLayoutRoute: typeof PathlessLayoutNestedLayoutRouteWithChildren
 }
 
 const PathlessLayoutRouteChildren: PathlessLayoutRouteChildren = {
-	PathlessLayoutNestedLayoutRoute: PathlessLayoutNestedLayoutRouteWithChildren,
-};
+  PathlessLayoutNestedLayoutRoute: PathlessLayoutNestedLayoutRouteWithChildren,
+}
 
 const PathlessLayoutRouteWithChildren = PathlessLayoutRoute._addFileChildren(
-	PathlessLayoutRouteChildren,
-);
+  PathlessLayoutRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
-	IndexRoute: IndexRoute,
-	PostsRouteRoute: PostsRouteRouteWithChildren,
-	PathlessLayoutRoute: PathlessLayoutRouteWithChildren,
-	AnchorRoute: AnchorRoute,
-};
+  IndexRoute: IndexRoute,
+  PokemonRouteRoute: PokemonRouteRouteWithChildren,
+  PostsRouteRoute: PostsRouteRouteWithChildren,
+  PathlessLayoutRoute: PathlessLayoutRouteWithChildren,
+  AnchorRoute: AnchorRoute,
+}
 export const routeTree = rootRouteImport
-	._addFileChildren(rootRouteChildren)
-	._addFileTypes<FileRouteTypes>();
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()

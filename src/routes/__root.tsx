@@ -27,6 +27,14 @@ function RootComponent() {
 					Home
 				</Link>{' '}
 				<Link
+					to="/pokemon"
+					activeProps={{
+						className: 'font-bold',
+					}}
+				>
+					Pokemon list
+				</Link>{' '}
+				<Link
 					to="/posts"
 					activeProps={{
 						className: 'font-bold',
