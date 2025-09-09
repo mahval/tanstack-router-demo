@@ -32,7 +32,15 @@ function RootComponent() {
 						className: 'font-bold',
 					}}
 				>
-					Pokemon list
+					Pokémon list
+				</Link>{' '}
+				<Link
+					to="/pokemon/gen"
+					activeProps={{
+						className: 'font-bold',
+					}}
+				>
+					Generation list
 				</Link>{' '}
 				<Link
 					to="/posts"

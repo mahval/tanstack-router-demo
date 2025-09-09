@@ -1,19 +1,23 @@
 import { createFileRoute, Link, Outlet } from '@tanstack/react-router';
 import { fetchPokemonList } from '../pokemon';
 
-export const Route = createFileRoute('/pokemon')({
-	loader: fetchPokemonList,
+export const Route = createFileRoute('/3pokemon')({
+	loader: async () => {
+		return await fetchPokemonList();
+	},
 	component: RouteComponent,
 });
 
 function RouteComponent() {
-	const pokemonList = Route.useLoaderData();
+	const pokemon = Route.useLoaderData();
+
+	console.log('pokemon', pokemon);
 
 	return (
 		<div className="p-2 flex gap-2 max-h-screen">
 			<ul className="list-none pl-4 overflow-auto min-w-48">
 				{[
-					...pokemonList,
+					...pokemon,
 					{
 						id: 'i-do-not-exist',
 						name: 'i-do-not-exist',
@@ -26,7 +30,7 @@ function RouteComponent() {
 							className="whitespace-nowrap border-b border-gray-300 py-2 capitalize"
 						>
 							<Link
-								to="/pokemon/$pokemonId"
+								to='/pokemon/$pokemonId'
 								params={{
 									pokemonId: pokemon.id,
 								}}
@@ -36,11 +40,11 @@ function RouteComponent() {
 								<div>{pokemon.name}</div>
 							</Link>
 						</li>
-					);
+					)
 				})}
 			</ul>
 			<hr />
 			<Outlet />
 		</div>
-	);
+	)
 }

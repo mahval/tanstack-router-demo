@@ -27,7 +27,6 @@ export interface Pokemon {
 }
 
 export interface PokemonListItem {
-    id: string;
     name: string;
     url: string;
 }
@@ -39,23 +38,17 @@ export interface PokemonListResponse {
     results: PokemonListItem[];
 }
 
-export interface PokemonType {
-    id: number;
-    name: string;
-    pokemon: Array<{
-        pokemon: {
-            name: string;
-            url: string;
-        };
-    }>;
+export interface PokemonListByTypeResponse {
+    pokemon: { pokemon: PokemonListItem; slot: number }[]
 }
 
-// Search params types
+export interface PokemonListByGenerationResponse {
+    pokemon_species: PokemonListItem[]
+}
+
 export interface PokemonListSearch {
     page?: number;
     search?: string;
 }
 
-interface PokemonDetailSearch {
-    tab?: 'stats' | 'moves' | 'info';
-}
+export type Generation = 1 | 2 | 3 | 4 | 5;

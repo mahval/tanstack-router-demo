@@ -9,20 +9,29 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PokemonRouteImport } from './routes/pokemon'
 import { Route as AnchorRouteImport } from './routes/anchor'
 import { Route as PathlessLayoutRouteImport } from './routes/_pathlessLayout'
 import { Route as PostsRouteRouteImport } from './routes/posts.route'
-import { Route as PokemonRouteRouteImport } from './routes/pokemon.route'
+import { Route as R3pokemonRouteRouteImport } from './routes/3pokemon.route'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PostsIndexRouteImport } from './routes/posts.index'
-import { Route as PokemonIndexRouteImport } from './routes/pokemon.index'
+import { Route as PokemonIndexRouteImport } from './routes/pokemon/index'
 import { Route as PostsChar123CategoryChar125RouteImport } from './routes/posts.{-$category}'
 import { Route as PostsPostIdRouteImport } from './routes/posts.$postId'
-import { Route as PokemonPokemonIdRouteImport } from './routes/pokemon.$pokemonId'
+import { Route as PokemonPokemonIdRouteImport } from './routes/pokemon/$pokemonId'
 import { Route as PathlessLayoutNestedLayoutRouteImport } from './routes/_pathlessLayout/_nested-layout'
+import { Route as PokemonGenIndexRouteImport } from './routes/pokemon/gen/index'
+import { Route as PokemonGenGenerationRouteImport } from './routes/pokemon/gen/$generation'
 import { Route as PathlessLayoutNestedLayoutRouteBRouteImport } from './routes/_pathlessLayout/_nested-layout/route-b'
 import { Route as PathlessLayoutNestedLayoutRouteARouteImport } from './routes/_pathlessLayout/_nested-layout/route-a'
+import { Route as PokemonGenGenerationPokemonIdRouteImport } from './routes/pokemon/gen_/$generation/$pokemonId'
 
+const PokemonRoute = PokemonRouteImport.update({
+  id: '/pokemon',
+  path: '/pokemon',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AnchorRoute = AnchorRouteImport.update({
   id: '/anchor',
   path: '/anchor',
@@ -37,9 +46,9 @@ const PostsRouteRoute = PostsRouteRouteImport.update({
   path: '/posts',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PokemonRouteRoute = PokemonRouteRouteImport.update({
-  id: '/pokemon',
-  path: '/pokemon',
+const R3pokemonRouteRoute = R3pokemonRouteRouteImport.update({
+  id: '/3pokemon',
+  path: '/3pokemon',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -55,7 +64,7 @@ const PostsIndexRoute = PostsIndexRouteImport.update({
 const PokemonIndexRoute = PokemonIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => PokemonRouteRoute,
+  getParentRoute: () => PokemonRoute,
 } as any)
 const PostsChar123CategoryChar125Route =
   PostsChar123CategoryChar125RouteImport.update({
@@ -71,13 +80,23 @@ const PostsPostIdRoute = PostsPostIdRouteImport.update({
 const PokemonPokemonIdRoute = PokemonPokemonIdRouteImport.update({
   id: '/$pokemonId',
   path: '/$pokemonId',
-  getParentRoute: () => PokemonRouteRoute,
+  getParentRoute: () => PokemonRoute,
 } as any)
 const PathlessLayoutNestedLayoutRoute =
   PathlessLayoutNestedLayoutRouteImport.update({
     id: '/_nested-layout',
     getParentRoute: () => PathlessLayoutRoute,
   } as any)
+const PokemonGenIndexRoute = PokemonGenIndexRouteImport.update({
+  id: '/gen/',
+  path: '/gen/',
+  getParentRoute: () => PokemonRoute,
+} as any)
+const PokemonGenGenerationRoute = PokemonGenGenerationRouteImport.update({
+  id: '/gen/$generation',
+  path: '/gen/$generation',
+  getParentRoute: () => PokemonRoute,
+} as any)
 const PathlessLayoutNestedLayoutRouteBRoute =
   PathlessLayoutNestedLayoutRouteBRouteImport.update({
     id: '/route-b',
@@ -90,12 +109,19 @@ const PathlessLayoutNestedLayoutRouteARoute =
     path: '/route-a',
     getParentRoute: () => PathlessLayoutNestedLayoutRoute,
   } as any)
+const PokemonGenGenerationPokemonIdRoute =
+  PokemonGenGenerationPokemonIdRouteImport.update({
+    id: '/gen_/$generation/$pokemonId',
+    path: '/gen/$generation/$pokemonId',
+    getParentRoute: () => PokemonRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/pokemon': typeof PokemonRouteRouteWithChildren
+  '/3pokemon': typeof R3pokemonRouteRoute
   '/posts': typeof PostsRouteRouteWithChildren
   '/anchor': typeof AnchorRoute
+  '/pokemon': typeof PokemonRouteWithChildren
   '/pokemon/$pokemonId': typeof PokemonPokemonIdRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/posts/{-$category}': typeof PostsChar123CategoryChar125Route
@@ -103,9 +129,13 @@ export interface FileRoutesByFullPath {
   '/posts/': typeof PostsIndexRoute
   '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
   '/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
+  '/pokemon/gen/$generation': typeof PokemonGenGenerationRoute
+  '/pokemon/gen': typeof PokemonGenIndexRoute
+  '/pokemon/gen/$generation/$pokemonId': typeof PokemonGenGenerationPokemonIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/3pokemon': typeof R3pokemonRouteRoute
   '/anchor': typeof AnchorRoute
   '/pokemon/$pokemonId': typeof PokemonPokemonIdRoute
   '/posts/$postId': typeof PostsPostIdRoute
@@ -114,14 +144,18 @@ export interface FileRoutesByTo {
   '/posts': typeof PostsIndexRoute
   '/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
   '/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
+  '/pokemon/gen/$generation': typeof PokemonGenGenerationRoute
+  '/pokemon/gen': typeof PokemonGenIndexRoute
+  '/pokemon/gen/$generation/$pokemonId': typeof PokemonGenGenerationPokemonIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/pokemon': typeof PokemonRouteRouteWithChildren
+  '/3pokemon': typeof R3pokemonRouteRoute
   '/posts': typeof PostsRouteRouteWithChildren
   '/_pathlessLayout': typeof PathlessLayoutRouteWithChildren
   '/anchor': typeof AnchorRoute
+  '/pokemon': typeof PokemonRouteWithChildren
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
   '/pokemon/$pokemonId': typeof PokemonPokemonIdRoute
   '/posts/$postId': typeof PostsPostIdRoute
@@ -130,14 +164,18 @@ export interface FileRoutesById {
   '/posts/': typeof PostsIndexRoute
   '/_pathlessLayout/_nested-layout/route-a': typeof PathlessLayoutNestedLayoutRouteARoute
   '/_pathlessLayout/_nested-layout/route-b': typeof PathlessLayoutNestedLayoutRouteBRoute
+  '/pokemon/gen/$generation': typeof PokemonGenGenerationRoute
+  '/pokemon/gen/': typeof PokemonGenIndexRoute
+  '/pokemon/gen_/$generation/$pokemonId': typeof PokemonGenGenerationPokemonIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/pokemon'
+    | '/3pokemon'
     | '/posts'
     | '/anchor'
+    | '/pokemon'
     | '/pokemon/$pokemonId'
     | '/posts/$postId'
     | '/posts/{-$category}'
@@ -145,9 +183,13 @@ export interface FileRouteTypes {
     | '/posts/'
     | '/route-a'
     | '/route-b'
+    | '/pokemon/gen/$generation'
+    | '/pokemon/gen'
+    | '/pokemon/gen/$generation/$pokemonId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/3pokemon'
     | '/anchor'
     | '/pokemon/$pokemonId'
     | '/posts/$postId'
@@ -156,13 +198,17 @@ export interface FileRouteTypes {
     | '/posts'
     | '/route-a'
     | '/route-b'
+    | '/pokemon/gen/$generation'
+    | '/pokemon/gen'
+    | '/pokemon/gen/$generation/$pokemonId'
   id:
     | '__root__'
     | '/'
-    | '/pokemon'
+    | '/3pokemon'
     | '/posts'
     | '/_pathlessLayout'
     | '/anchor'
+    | '/pokemon'
     | '/_pathlessLayout/_nested-layout'
     | '/pokemon/$pokemonId'
     | '/posts/$postId'
@@ -171,18 +217,29 @@ export interface FileRouteTypes {
     | '/posts/'
     | '/_pathlessLayout/_nested-layout/route-a'
     | '/_pathlessLayout/_nested-layout/route-b'
+    | '/pokemon/gen/$generation'
+    | '/pokemon/gen/'
+    | '/pokemon/gen_/$generation/$pokemonId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PokemonRouteRoute: typeof PokemonRouteRouteWithChildren
+  R3pokemonRouteRoute: typeof R3pokemonRouteRoute
   PostsRouteRoute: typeof PostsRouteRouteWithChildren
   PathlessLayoutRoute: typeof PathlessLayoutRouteWithChildren
   AnchorRoute: typeof AnchorRoute
+  PokemonRoute: typeof PokemonRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/pokemon': {
+      id: '/pokemon'
+      path: '/pokemon'
+      fullPath: '/pokemon'
+      preLoaderRoute: typeof PokemonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/anchor': {
       id: '/anchor'
       path: '/anchor'
@@ -204,11 +261,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostsRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/pokemon': {
-      id: '/pokemon'
-      path: '/pokemon'
-      fullPath: '/pokemon'
-      preLoaderRoute: typeof PokemonRouteRouteImport
+    '/3pokemon': {
+      id: '/3pokemon'
+      path: '/3pokemon'
+      fullPath: '/3pokemon'
+      preLoaderRoute: typeof R3pokemonRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -230,7 +287,7 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/pokemon/'
       preLoaderRoute: typeof PokemonIndexRouteImport
-      parentRoute: typeof PokemonRouteRoute
+      parentRoute: typeof PokemonRoute
     }
     '/posts/{-$category}': {
       id: '/posts/{-$category}'
@@ -251,7 +308,7 @@ declare module '@tanstack/react-router' {
       path: '/$pokemonId'
       fullPath: '/pokemon/$pokemonId'
       preLoaderRoute: typeof PokemonPokemonIdRouteImport
-      parentRoute: typeof PokemonRouteRoute
+      parentRoute: typeof PokemonRoute
     }
     '/_pathlessLayout/_nested-layout': {
       id: '/_pathlessLayout/_nested-layout'
@@ -259,6 +316,20 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof PathlessLayoutNestedLayoutRouteImport
       parentRoute: typeof PathlessLayoutRoute
+    }
+    '/pokemon/gen/': {
+      id: '/pokemon/gen/'
+      path: '/gen'
+      fullPath: '/pokemon/gen'
+      preLoaderRoute: typeof PokemonGenIndexRouteImport
+      parentRoute: typeof PokemonRoute
+    }
+    '/pokemon/gen/$generation': {
+      id: '/pokemon/gen/$generation'
+      path: '/gen/$generation'
+      fullPath: '/pokemon/gen/$generation'
+      preLoaderRoute: typeof PokemonGenGenerationRouteImport
+      parentRoute: typeof PokemonRoute
     }
     '/_pathlessLayout/_nested-layout/route-b': {
       id: '/_pathlessLayout/_nested-layout/route-b'
@@ -274,22 +345,15 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PathlessLayoutNestedLayoutRouteARouteImport
       parentRoute: typeof PathlessLayoutNestedLayoutRoute
     }
+    '/pokemon/gen_/$generation/$pokemonId': {
+      id: '/pokemon/gen_/$generation/$pokemonId'
+      path: '/gen/$generation/$pokemonId'
+      fullPath: '/pokemon/gen/$generation/$pokemonId'
+      preLoaderRoute: typeof PokemonGenGenerationPokemonIdRouteImport
+      parentRoute: typeof PokemonRoute
+    }
   }
 }
-
-interface PokemonRouteRouteChildren {
-  PokemonPokemonIdRoute: typeof PokemonPokemonIdRoute
-  PokemonIndexRoute: typeof PokemonIndexRoute
-}
-
-const PokemonRouteRouteChildren: PokemonRouteRouteChildren = {
-  PokemonPokemonIdRoute: PokemonPokemonIdRoute,
-  PokemonIndexRoute: PokemonIndexRoute,
-}
-
-const PokemonRouteRouteWithChildren = PokemonRouteRoute._addFileChildren(
-  PokemonRouteRouteChildren,
-)
 
 interface PostsRouteRouteChildren {
   PostsPostIdRoute: typeof PostsPostIdRoute
@@ -337,12 +401,32 @@ const PathlessLayoutRouteWithChildren = PathlessLayoutRoute._addFileChildren(
   PathlessLayoutRouteChildren,
 )
 
+interface PokemonRouteChildren {
+  PokemonPokemonIdRoute: typeof PokemonPokemonIdRoute
+  PokemonIndexRoute: typeof PokemonIndexRoute
+  PokemonGenGenerationRoute: typeof PokemonGenGenerationRoute
+  PokemonGenIndexRoute: typeof PokemonGenIndexRoute
+  PokemonGenGenerationPokemonIdRoute: typeof PokemonGenGenerationPokemonIdRoute
+}
+
+const PokemonRouteChildren: PokemonRouteChildren = {
+  PokemonPokemonIdRoute: PokemonPokemonIdRoute,
+  PokemonIndexRoute: PokemonIndexRoute,
+  PokemonGenGenerationRoute: PokemonGenGenerationRoute,
+  PokemonGenIndexRoute: PokemonGenIndexRoute,
+  PokemonGenGenerationPokemonIdRoute: PokemonGenGenerationPokemonIdRoute,
+}
+
+const PokemonRouteWithChildren =
+  PokemonRoute._addFileChildren(PokemonRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PokemonRouteRoute: PokemonRouteRouteWithChildren,
+  R3pokemonRouteRoute: R3pokemonRouteRoute,
   PostsRouteRoute: PostsRouteRouteWithChildren,
   PathlessLayoutRoute: PathlessLayoutRouteWithChildren,
   AnchorRoute: AnchorRoute,
+  PokemonRoute: PokemonRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
